@@ -1,0 +1,20 @@
+{
+	"name": "browser-extension-builder",
+	"version": "1.0.0",
+	"description": "A simple tool to get you started on building a browser extension.",
+	"main": "index.js",
+	"author": "zvikasdongre <zvikasdongre@gmail.com>",
+	"license": "MIT",
+	"private": true,
+	"bin": {
+		"beb": "index.js"
+	},
+	"devDependencies": {
+		"colors": "^1.4.0",
+		"fs-extra": "^8.1.0",
+		"minimist": "^1.2.5",
+		"prompts": "^2.4.1",
+		"slugify": "^1.5.3",
+		"template-file": "^5.1.0"
+	}
+}
