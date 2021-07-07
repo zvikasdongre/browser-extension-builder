@@ -16,6 +16,75 @@ const frameworks = [
 	}
 ];
 
+const ext_permissions = [
+	{ value: "activeTab" },
+	{ value: "alarms" },
+	{ value: "background" },
+	{ value: "bookmarks" },
+	{ value: "browsingData" },
+	{ value: "certificateProvider" },
+	{ value: "clipboardRead" },
+	{ value: "clipboardWrite" },
+	{ value: "contentSettings" },
+	{ value: "contextMenus" },
+	{ value: "cookies" },
+	{ value: "debugger" },
+	{ value: "declarativeContent" },
+	{ value: "declarativeNetRequest" },
+	{ value: "declarativeNetRequestFeedback" },
+	{ value: "declarativeWebRequest" },
+	{ value: "desktopCapture" },
+	{ value: "documentScan" },
+	{ value: "downloads" },
+	{ value: "enterprise.deviceAttributes" },
+	{ value: "enterprise.hardwarePlatform" },
+	{ value: "enterprise.networkingAttributes" },
+	{ value: "enterprise.platformKeys" },
+	{ value: "experimental" },
+	{ value: "fileBrowserHandler" },
+	{ value: "fileSystemProvider" },
+	{ value: "fontSettings" },
+	{ value: "gcm" },
+	{ value: "geolocation" },
+	{ value: "history" },
+	{ value: "identity" },
+	{ value: "idle" },
+	{ value: "loginState" },
+	{ value: "management" },
+	{ value: "nativeMessaging" },
+	{ value: "notifications" },
+	{ value: "pageCapture" },
+	{ value: "platformKeys" },
+	{ value: "power" },
+	{ value: "printerProvider" },
+	{ value: "printing" },
+	{ value: "printingMetrics" },
+	{ value: "privacy" },
+	{ value: "processes" },
+	{ value: "proxy" },
+	{ value: "scripting" },
+	{ value: "search" },
+	{ value: "sessions" },
+	{ value: "signedInDevices" },
+	{ value: "storage" },
+	{ value: "system.cpu" },
+	{ value: "system.display" },
+	{ value: "system.memory" },
+	{ value: "system.storage" },
+	{ value: "tabCapture" },
+	{ value: "tabGroups" },
+	{ value: "tabs" },
+	{ value: "topSites" },
+	{ value: "tts" },
+	{ value: "ttsEngine" },
+	{ value: "unlimitedStorage" },
+	{ value: "vpnProvider" },
+	{ value: "wallpaper" },
+	{ value: "webNavigation" },
+	{ value: "webRequest" },
+	{ value: "webRequestBlocking" }
+]
+
 async function launch() {
 
 	let orignal_name = "My extension";
@@ -49,16 +118,29 @@ async function launch() {
 				}
 			})
 		},
+		{
+			type: 'confirm',
+			name: 'permissions',
+			message: 'Do you want to define permissions of your extension?',
+			initial: true
+		},
+		{
+			type: prev => prev ? 'autocompleteMultiselect' : null,
+			name: 'permissionNames',
+			message: 'Select permissions (You can always change them later): ',
+			choices: ext_permissions,
+			hint: '- Space to select. Return to submit'
+		}
 	];
 
 	const promptCancelled = (prompt, answers) => {
 		throw new Error('Abort.');
-  }
-  try {
+	}
+	try {
 
 		const response = await prompts(questions, {onCancel: promptCancelled});
-		const { name, description, framework } = response;
-
+		const { name, description, framework, permissionNames } = response;
+		console.log(permissionNames);
 		let dir_name = slugify(name.trim(), {lower: true});
 
 		const copy_filter = (src, dest) => {
@@ -67,7 +149,11 @@ async function launch() {
 				renderToFolder(src, path.dirname(dest), {name: dir_name, description});
 				return false;
 			} else if (file_name === "manifest.json") {
-				renderToFolder(src, path.dirname(dest), response);
+				renderToFolder(src, path.dirname(dest), {
+					name: dir_name, 
+					description, 
+					permissionNames: permissionNames ? JSON.stringify(permissionNames) : "[]"
+				});
 				return false;
 			} else {
 				return true;
@@ -85,25 +171,25 @@ async function launch() {
 
 		console.log(colors.brightCyan(`\nCloned template in "${dir_name}".`));
 		const install_msg = "".concat(
-	  `    cd ${dir_name}\n`,
-	  `    npm install\n`,
-	  `    npm run dev\n`,
-	  `\n    --- or ---\n\n`,
-	  `    cd ${dir_name}\n`,
-	  `    yarn\n`,
-	  `    yarn dev\n`
-	  );
+		`    cd ${dir_name}\n`,
+		`    npm install\n`,
+		`    npm run dev\n`,
+		`\n    --- or ---\n\n`,
+		`    cd ${dir_name}\n`,
+		`    yarn\n`,
+		`    yarn dev\n`
+		);
 
-	  console.log(colors.brightGreen("\nDone. Here are few things you have to do now:\n"));
-	  console.log("1. Start in dev mode:");
-	  console.log(install_msg);
-	  console.log("2. Load your extension in the browser by selecting the `dist` folder.");
-	  // console.log("    a. Open the Extension Management page by navigating to chrome://extensions.\n    b. Enable Developer Mode by clicking the toggle switch next to Developer mode.\n    c. Click the Load unpacked button and select the `dist` folder.")
-	  console.log("3. And you are done. Happy Coding!");
-  } catch (e) {
-  	console.log(colors.brightRed(e.message));
-  	return;
-  }
+		console.log(colors.brightGreen("\nDone. Here are few things you have to do now:\n"));
+		console.log("1. Start in dev mode:");
+		console.log(install_msg);
+		console.log("2. Load your extension in the browser by selecting the `dist` folder.");
+		// console.log("    a. Open the Extension Management page by navigating to chrome://extensions.\n    b. Enable Developer Mode by clicking the toggle switch next to Developer mode.\n    c. Click the Load unpacked button and select the `dist` folder.")
+		console.log("3. And you are done. Happy Coding!");
+	} catch (e) {
+		console.log(colors.brightRed(e.message));
+		return;
+	}
 }
 
 launch();
