@@ -1,15 +1,21 @@
 {
 	"name": "browser-extension-builder",
-	"version": "1.0.0",
+	"version": "0.0.2",
 	"description": "A simple tool to get you started on building a browser extension.",
 	"main": "index.js",
 	"author": "zvikasdongre <zvikasdongre@gmail.com>",
 	"license": "MIT",
-	"private": true,
+	"keywords": [
+		"browser-extension",
+		"chrome-extension",
+		"firefox-extension",
+		"web-extension",
+		"builder"
+	],
 	"bin": {
-		"beb": "index.js"
+		"ext-build": "index.js"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"colors": "^1.4.0",
 		"fs-extra": "^8.1.0",
 		"minimist": "^1.2.5",
