@@ -5,6 +5,14 @@
 	"main": "index.js",
 	"author": "zvikasdongre <zvikasdongre@gmail.com>",
 	"license": "MIT",
+	"repository": {
+		"url": "https://github.com/zvikasdongre/browser-extension-builder",
+		"type": "git"
+	},
+	"bugs": "https://github.com/zvikasdongre/browser-extension-builder/issues",
+	"contributors": [
+		"xvishaldongre <xvishaldongre@gmail.com>"
+	],
 	"keywords": [
 		"browser-extension",
 		"chrome-extension",
