@@ -1,6 +1,6 @@
 {
   "name": "browser-extension-builder",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple tool to get you started on building a browser extension.",
   "main": "index.js",
   "author": "zvikasdongre <zvikasdongre@gmail.com>",
