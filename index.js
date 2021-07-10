@@ -122,7 +122,7 @@ async function launch() {
 			type: 'confirm',
 			name: 'permissions',
 			message: 'Do you want to define permissions of your extension?',
-			initial: true
+			initial: false
 		},
 		{
 			type: prev => prev ? 'autocompleteMultiselect' : null,
@@ -130,7 +130,13 @@ async function launch() {
 			message: 'Select permissions (You can always change them later): ',
 			choices: ext_permissions,
 			hint: '- Space to select. Return to submit'
-		}
+		},
+		{
+			type: 'confirm',
+			name: 'webextPolyfill',
+			message: 'Do you want `webextension-polyfill` package?',
+			initial: true
+		},
 	];
 
 	const promptCancelled = (prompt, answers) => {
@@ -139,14 +145,17 @@ async function launch() {
 	try {
 
 		const response = await prompts(questions, {onCancel: promptCancelled});
-		const { name, description, framework, permissionNames } = response;
-		console.log(permissionNames);
+		const { name, description, framework, permissionNames, webextPolyfill } = response;
 		let dir_name = slugify(name.trim(), {lower: true});
 
 		const copy_filter = (src, dest) => {
 			const file_name = path.basename(src);
 			if (file_name === "package.json") {
-				renderToFolder(src, path.dirname(dest), {name: dir_name, description});
+				renderToFolder(src, path.dirname(dest), {
+					name: dir_name,
+					description,
+					dependencies: webextPolyfill ? JSON.stringify({ "webextension-polyfill": "^0.8.0" }) : "{}"
+				});
 				return false;
 			} else if (file_name === "manifest.json") {
 				renderToFolder(src, path.dirname(dest), {
@@ -163,30 +172,11 @@ async function launch() {
 		const framework_path = path.join(__dirname, "templates", framework);
 		fs.copySync(framework_path, path.join(process.cwd(), dir_name), { filter: copy_filter });
 
-		// Adds the extension recommendation
-		fs.mkdirSync(path.join(dir_name, ".vscode"), { recursive: true })
-		fs.writeFileSync(path.join(dir_name, ".vscode", "extensions.json"), JSON.stringify(
-			{"recommendations": ["svelte.svelte-vscode"]}, null, 2)
-		)
-
 		console.log(colors.brightCyan(`\nCloned template in "${dir_name}".`));
-		const install_msg = "".concat(
-		`    cd ${dir_name}\n`,
-		`    npm install\n`,
-		`    npm run dev\n`,
-		`\n    --- or ---\n\n`,
-		`    cd ${dir_name}\n`,
-		`    yarn\n`,
-		`    yarn dev\n`
-		);
-
-		console.log(colors.brightGreen("\nDone. Here are few things you have to do now:\n"));
-		console.log("1. Start in dev mode:");
-		console.log(install_msg);
-		console.log("2. Load your extension in the browser by selecting the `dist` folder.");
-		// console.log("    a. Open the Extension Management page by navigating to chrome://extensions.\n    b. Enable Developer Mode by clicking the toggle switch next to Developer mode.\n    c. Click the Load unpacked button and select the `dist` folder.")
-		console.log("3. And you are done. Happy Coding!");
-	} catch (e) {
+		
+		console.log(colors.brightGreen("\nDone. We recommend you to read the `README.md` that is generated with your project.\n"));
+		
+		} catch (e) {
 		console.log(colors.brightRed(e.message));
 		return;
 	}

@@ -10,10 +10,11 @@
 		"chrome-extension",
 		"firefox-extension",
 		"web-extension",
-		"builder"
+		"builder",
+		"cli"
 	],
 	"bin": {
-		"ext-build": "index.js"
+		"build-ext": "index.js"
 	},
 	"dependencies": {
 		"colors": "^1.4.0",
