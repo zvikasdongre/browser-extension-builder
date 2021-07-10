@@ -1,35 +1,35 @@
 {
-	"name": "browser-extension-builder",
-	"version": "0.0.2",
-	"description": "A simple tool to get you started on building a browser extension.",
-	"main": "index.js",
-	"author": "zvikasdongre <zvikasdongre@gmail.com>",
-	"license": "MIT",
-	"repository": {
-		"url": "https://github.com/zvikasdongre/browser-extension-builder",
-		"type": "git"
-	},
-	"bugs": "https://github.com/zvikasdongre/browser-extension-builder/issues",
-	"contributors": [
-		"xvishaldongre <xvishaldongre@gmail.com>"
-	],
-	"keywords": [
-		"browser-extension",
-		"chrome-extension",
-		"firefox-extension",
-		"web-extension",
-		"builder",
-		"cli"
-	],
-	"bin": {
-		"build-ext": "index.js"
-	},
-	"dependencies": {
-		"colors": "^1.4.0",
-		"fs-extra": "^8.1.0",
-		"minimist": "^1.2.5",
-		"prompts": "^2.4.1",
-		"slugify": "^1.5.3",
-		"template-file": "^5.1.0"
-	}
+  "name": "browser-extension-builder",
+  "version": "0.0.2",
+  "description": "A simple tool to get you started on building a browser extension.",
+  "main": "index.js",
+  "author": "zvikasdongre <zvikasdongre@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/zvikasdongre/browser-extension-builder",
+    "type": "git"
+  },
+  "bugs": "https://github.com/zvikasdongre/browser-extension-builder/issues",
+  "contributors": [
+    "xvishaldongre <xvishaldongre@gmail.com>"
+  ],
+  "keywords": [
+    "browser-extension",
+    "chrome-extension",
+    "firefox-extension",
+    "web-extension",
+    "builder",
+    "cli"
+  ],
+  "bin": {
+    "build-ext": "index.js"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "fs-extra": "^8.1.0",
+    "minimist": "^1.2.5",
+    "prompts": "^2.4.1",
+    "slugify": "^1.5.3",
+    "template-file": "^5.1.0"
+  }
 }
