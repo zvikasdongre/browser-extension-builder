@@ -3,7 +3,7 @@ console.clear();
 console.log(
   "%cBackground Script!",
   `font-size: 12px;
-  color: coral;
+  color: cyan;
   font-style: italic;
   font-weight: bold;
   background: #202124;

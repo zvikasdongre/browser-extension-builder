@@ -7,6 +7,9 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
   },
+  "dependencies": {
+    {{polyfillDep}}
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
@@ -19,6 +22,5 @@
     "rollup-plugin-empty-dir": "^1.0.5",
     "rollup-plugin-postcss": "^4.0.0",
     "postcss": "^8.3.5"
-  },
-  "dependencies": {{dependencies}}
+  }
 }

@@ -13,7 +13,11 @@ const frameworks = [
   {
     name: colors.brightYellow("Svelte"),
     template_name: "svelte"
-  }
+  },
+  {
+    name: colors.brightCyan("React"),
+    template_name: "react"
+  },
 ];
 
 const ext_permissions = [
@@ -154,14 +158,15 @@ async function launch() {
         renderToFolder(src, path.dirname(dest), {
           name: dir_name,
           description,
-          dependencies: webextPolyfill ? JSON.stringify({ "webextension-polyfill": "^0.8.0" }) : "{}"
+          commaAftrDep: () => webextPolyfill ? "," : "",
+          polyfillDep: () => webextPolyfill ? `"webextension-polyfill": "^0.7.0"` : ""
         });
         return false;
       } else if (file_name === "manifest.json") {
         renderToFolder(src, path.dirname(dest), {
-          name: dir_name, 
+          name: name, 
           description, 
-          permissionNames: permissionNames ? JSON.stringify(permissionNames) : "[]"
+          permissionNames: () => permissionNames ? JSON.stringify(permissionNames) : "[]"
         });
         return false;
       } else {

@@ -1,4 +1,4 @@
-# Browser extension with svelte
+# Browser extension with react
 
 This project is created by the **browser-extension-builder**.
 
@@ -6,7 +6,7 @@ This project is created by the **browser-extension-builder**.
 
 ### Install the dependencies:
 
-ℹ️ Info: If you want `Typescript` then see [Typescript section](#using-typescript) below, And then proceed.
+ℹ️ Info: If you want `Typescript` then read [Typescript section](#using-typescript) below, And then proceed.
 
 ```bash
 npm install
