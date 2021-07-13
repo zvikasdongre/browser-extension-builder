@@ -1,6 +1,7 @@
 # Browser extension with react
 
 This project is created by the **browser-extension-builder**.
+You can create a browser extension with `react` using this template.
 
 ## Get started
 

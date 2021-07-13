@@ -2,37 +2,37 @@
 
 A simple tool to get you started on building a browser extension.
 
----
+> ### 🎉 **`react` template is here!**
+Yes, you heard it right. Now you can create browser extensions with `react` and yes, with `react-typescript` too.
 
-## Getting Started
+### Getting Started
 
-### Installation:
+#### Installation:
 
 ```bash
 npm install browser-extension-builder -g
 ```
 
-### Usage:
+#### Usage:
 
 Run:
 ```bash
 build-ext
 ```
 ...And answer the questions, And your project will be created in the current directory.
-Sorry, but we only have template for `svelte` browser-extension.
 
-### After your project created:
+> After you created your project read its `README` file, all the instructions will be there.
 
-After you created your project read its `README` file, all the instructions will be there.
+---
 
-## Contribution (Help needed!): 
+### Github: 
 
-As we said earlier, we only have template for `svelte` browser-extension.
-So, If you want to contribute to this project, please go ahead and [contribute](https://github.com/zvikasdongre/browser-extension-builder).
+This project is opensource, you can find it [here](https://github.com/zvikasdongre/browser-extension-builder).
 
-## Work in progress:
+### Todo:
 
-We are working on template of other frameworks like `vue`, `react`, etc.
-which we will release soon.
+- [X] Make `svelte` template.
+- [X] Make `react` template.
+- [ ] Make `vue` template.
 
 ---

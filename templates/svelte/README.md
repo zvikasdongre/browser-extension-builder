@@ -1,6 +1,7 @@
 # Browser extension with svelte
 
 This project is created by the **browser-extension-builder**.
+You can create a browser extension with `svelte` using this template.
 
 ## Get started
 
